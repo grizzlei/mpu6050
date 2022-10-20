@@ -1,0 +1,8 @@
+[Service]
+Type=simple
+RemainAfterExit=no
+Restart=always
+ExecStart=mpu6050
+
+[Install]
+WantedBy=multi-user.target
