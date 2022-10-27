@@ -22,7 +22,7 @@ mpu6050_t *mpu6050_init(const char *dev)
 		return NULL;
 	}
 
-	i2c_smbus_write_byte_data(m->fd, 0x6b, 0x00);
+	i2c_smbus_write_byte_data(m->fd, 0x6B, 0x00);
 
 	return m;
 }
@@ -73,6 +73,60 @@ void mpu6050_get_accl_raw(mpu6050_t *m, int16_t *ax, int16_t *ay, int16_t *az)
 	*ax = mpu6050_read_word(m, 0x3B);
 	*ay = mpu6050_read_word(m, 0x3D);
 	*az = mpu6050_read_word(m, 0x3F);
+}
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_config(mpu6050_t * m, uint8_t config)
+{
+	i2c_smbus_write_byte_data(m->fd, 0x1A, config);
+}
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_config(mpu6050_t * m)
+{
+	return (uint8_t)i2c_smbus_read_byte_data(m->fd, 0x1A);
+}
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_gyro_config(mpu6050_t * m, uint8_t config)
+{
+	i2c_smbus_write_byte_data(m->fd, 0x1B, config);
+}
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_gyro_config(mpu6050_t * m)
+{
+	return (uint8_t)i2c_smbus_read_byte_data(m->fd, 0x1B);
+}
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_accl_config(mpu6050_t * m, uint8_t config)
+{
+	i2c_smbus_write_byte_data(m->fd, 0x1C, config);
+}
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_accl_config(mpu6050_t * m)
+{
+	return (uint8_t)i2c_smbus_read_byte_data(m->fd, 0x1C);
 }
 
 

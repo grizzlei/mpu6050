@@ -30,6 +30,10 @@ int main(int argc, char **argv)
 	signal(SIGINT, signal_handler);
 
 	mpu6050_t * m = mpu6050_init("/dev/i2c-0");
+
+	mpu6050_set_gyro_config(m, mpu6050_get_gyro_config(m) | MPU6050_GYRO_CONF_FS_500);
+	mpu6050_set_accl_config(m, mpu6050_get_accl_config(m) | MPU6050_ACCL_CONF_FS_4G);
+	
 	serial_t * s = serial_init("/dev/ttyS1", 115200);
 
 	int16_t gx = 0, gy = 0, gz = 0;

@@ -20,6 +20,22 @@ extern "C" {
 ////////////////////////////////////////////
 
 
+#define MPU6050_CONF_DEFAULT        0x00
+
+#define MPU6050_GYRO_CONF_FS_250    0x00
+#define MPU6050_GYRO_CONF_FS_500    0x08
+#define MPU6050_GYRO_CONF_FS_1000   0x10
+#define MPU6050_GYRO_CONF_FS_2000   0x18
+
+#define MPU6050_ACCL_CONF_FS_2G     0x00
+#define MPU6050_ACCL_CONF_FS_4G     0x08
+#define MPU6050_ACCL_CONF_FS_8G     0x10
+#define MPU6050_ACCL_CONF_FS_16G    0x18
+
+
+////////////////////////////////////////////
+
+
 typedef struct MPU6050
 {
     // file descriptor for i2c device.
@@ -64,6 +80,42 @@ void mpu6050_get_gyro_raw(mpu6050_t * m, int16_t *gx, int16_t *gy, int16_t *gz);
 
 // set ax, ay, az to most recent values from accelerometer
 void mpu6050_get_accl_raw(mpu6050_t * m, int16_t *ax, int16_t *ay, int16_t *az);
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_config(mpu6050_t * m, uint8_t config);
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_config(mpu6050_t * m);
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_gyro_config(mpu6050_t * m, uint8_t config);
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_gyro_config(mpu6050_t * m);
+
+
+////////////////////////////////////////////
+
+
+void mpu6050_set_accl_config(mpu6050_t * m, uint8_t config);
+
+
+////////////////////////////////////////////
+
+
+uint8_t mpu6050_get_accl_config(mpu6050_t * m);
 
 
 ////////////////////////////////////////////
