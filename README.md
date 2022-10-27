@@ -1,7 +1,7 @@
 ## simple mpu6050 reader for orange pi and raspberry pi
 
 this program will read gyro and accelerometer sensor data from mpu6050 imu and forward it to serial port, so you can work with the data on your development pc.
-mpu6050 is initialized with ±250 °/s gyro, ±2g accelerometer configurations.
+in `main.c` mpu6050 is initialized with ±500 °/s gyro, ±4g accelerometer configurations.
 
 following format is what you will receive from serial port, which are respectively accelerometer's x, y, z and gyro's x, y, z values:
 ```
