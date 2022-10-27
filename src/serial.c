@@ -62,8 +62,14 @@ serial_t *serial_init(const char *dev, int baudrate)
 
 int serial_cleanup(serial_t *s)
 {
+	int res;
 	tcsetattr(s->fd, TCSANOW, &s->tiosold);
-	return close(s->fd);
+	if ((res = sysguard(close(s->fd), "cannot close.")) == 0)
+	{
+		free(s);
+		return res;
+	}
+	return res;
 }
 
 
