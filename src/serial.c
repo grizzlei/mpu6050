@@ -1,44 +1,43 @@
 #include "serial.h"
 
-
 ////////////////////////////////////////////
 
 
-serial_t * serial_init(const char * dev, int baudrate)
+serial_t *serial_init(const char *dev, int baudrate)
 {
-	serial_t * s = (serial_t *) malloc(sizeof(serial_t));
+	serial_t *s = (serial_t *)malloc(sizeof(serial_t));
 
 	strncpy(s->device, dev, 63);
 
-    if ((s->fd = open(s->device, O_RDWR | O_NOCTTY)) < 0)
+	if ((s->fd = open(s->device, O_RDWR | O_NOCTTY)) < 0)
 	{
 		prerr("cannot open %s. (%s)", s->device, strerror(errno));
 		return NULL;
 	}
 
-	switch(baudrate)
+	switch (baudrate)
 	{
-		case 4800:
-			s->baudrate = B4800;
+	case 4800:
+		s->baudrate = B4800;
 		break;
-		case 9600:
-			s->baudrate = B9600;
+	case 9600:
+		s->baudrate = B9600;
 		break;
-		case 19200:
-			s->baudrate = B19200;
+	case 19200:
+		s->baudrate = B19200;
 		break;
-		case 38400:
-			s->baudrate = B38400;
+	case 38400:
+		s->baudrate = B38400;
 		break;
-		case 57600:
-			s->baudrate = B57600;
+	case 57600:
+		s->baudrate = B57600;
 		break;
-		case 115200:
-			s->baudrate = B115200;
+	case 115200:
+		s->baudrate = B115200;
 		break;
-		default:
-			prwar("baudrate not recognized, default value 115200 will be used.");
-			s->baudrate = B115200;
+	default:
+		prwar("baudrate not recognized, default value 115200 will be used.");
+		s->baudrate = B115200;
 		break;
 	}
 
@@ -61,7 +60,7 @@ serial_t * serial_init(const char * dev, int baudrate)
 ////////////////////////////////////////////
 
 
-int serial_cleanup(serial_t * s)
+int serial_cleanup(serial_t *s)
 {
 	tcsetattr(s->fd, TCSANOW, &s->tiosold);
 	return close(s->fd);
@@ -71,7 +70,7 @@ int serial_cleanup(serial_t * s)
 ////////////////////////////////////////////
 
 
-int serial_write_char(serial_t * s, char c)
+int serial_write_char(serial_t *s, char c)
 {
 	return sysguard(write(s->fd, &c, 1), "cannot write.");
 }
