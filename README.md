@@ -7,6 +7,8 @@ following format is what you will receive from serial port, which are respective
 ```
 -11224,6704,-88,-84,-99,-7
 ```
+#### quick start with libimu
+you can use `libimu` (https://github.com/grizzlei/libimu) to process the data you get from sensors. for a quick start, you can compile and use `demo.c` on your development pc.
 
 #### configuring pi
 first, enable `i2c-0` and `uart-1` interfaces from underlying operating system's tool. if you have to use a different configuration, update the code accordingly.
